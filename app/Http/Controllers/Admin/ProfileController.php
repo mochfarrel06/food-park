@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ProfilePasswordUpdateRequest;
 use App\Http\Requests\Admin\ProfileUpdateRequest;
+use App\Traits\FileUploadTrait;
 use Auth;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -12,6 +13,8 @@ use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
+    use FileUploadTrait;
+
     function index(): View
     {
         return view('admin.profile.index');
@@ -21,8 +24,11 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
 
+        $imagePath = $this->uploadImage($request, 'avatar');
+
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->avatar = isset($imagePath) ? $imagePath : $user->avatar;
         $user->save();
 
         toastr('Update successfully!!!', 'success');
