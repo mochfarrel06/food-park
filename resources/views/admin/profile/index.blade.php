@@ -39,7 +39,10 @@
                     <h4>Update Password</h4>
                 </div>
                 <div class="card-body">
-                    <form action="">
+                    <form action="{{ route('admin.profile.password.update') }}" method="POST">
+                        @csrf
+                        @method('PUT')
+
                         <div class="form-group">
                             <label for="current_password">Current Password</label>
                             <input type="password" id="current_password" name="current_password" class="form-control">
