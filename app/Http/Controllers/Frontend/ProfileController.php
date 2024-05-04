@@ -7,6 +7,7 @@ use App\Http\Requests\Frontend\ProfilePasswordUpdateRequest;
 use App\Http\Requests\Frontend\ProfileUpdateRequest;
 use Auth;
 use Illuminate\Http\RedirectResponse;
+use Request;
 
 class ProfileController extends Controller
 {
@@ -33,5 +34,10 @@ class ProfileController extends Controller
         toastr()->success('Password updated is successfully!');
 
         return redirect()->back();
+    }
+
+    public function updateAvatar(Request $request)
+    {
+        dd($request->all());
     }
 }
