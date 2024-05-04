@@ -28,8 +28,8 @@
                                 <div class="dasboard_header_img">
                                     <img src="{{ auth()->user()->avatar }}" alt="user" class="img-fluid w-100">
                                     <label for="upload"><i class="far fa-camera"></i></label>
-                                    <form action="" id="avatar_form" enctype="multipart/form-data">
-                                        <input type="file" id="upload" name="upload" hidden>
+                                    <form id="avatar_form">
+                                        <input type="file" id="upload" name="avatar" hidden>
                                     </form>
                                 </div>
                                 <h2>{{ auth()->user()->name }}</h2>
@@ -1233,15 +1233,32 @@
     </div>
     <!-- CART POPUT END -->
     <!--=========================
-                                                                    DASHBOARD END
-                                                                ==========================-->
+                                                                                                            DASHBOARD END
+                                                                                                        ==========================-->
 @endsection
 
 @push('scripts')
     <script>
-        $(document).ready(function(){
-            $('#upload').on('change', function(){
-                alert('Its working')
+        $(document).ready(function() {
+            $('#upload').on('change', function() {
+                let form = $('#avatar_form')[0];
+                let formData = new FormData(form);
+
+                $.ajax({
+                    method: 'POST',
+                    url: "{{ route('profile.avatar.update') }}",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            window.location.reload();
+                        }
+                    },
+                    error: function(error) {
+                        console.error(error)
+                    }
+                })
             })
         })
     </script>
