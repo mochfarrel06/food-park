@@ -111,8 +111,8 @@
                                             </h4>
 
                                             <div class="personal_info_text">
-                                                <p><span>Name:</span> Hasib Ahmed</p>
-                                                <p><span>Email:</span> hasibahmed@gmail.com</p>
+                                                <p><span>Name:</span> {{ auth()->user()->name }}</p>
+                                                <p><span>Email:</span> {{ auth()->user()->email }}</p>
                                             </div>
 
                                             <div class="fp_dash_personal_info_edit comment_input p-0">
@@ -125,14 +125,14 @@
                                                             <div class="fp__comment_imput_single">
                                                                 <label for="name">name</label>
                                                                 <input type="text" id="name" name="name"
-                                                                    placeholder="Name">
+                                                                    placeholder="Name" value="{{ auth()->user()->name }}">
                                                             </div>
                                                         </div>
                                                         <div class="col-12">
                                                             <div class="fp__comment_imput_single">
                                                                 <label for="email">email</label>
                                                                 <input type="email" id="email" name="email"
-                                                                    placeholder="Email">
+                                                                    placeholder="Email" value="{{ auth()->user()->email }}">
                                                             </div>
                                                         </div>
                                                         <div class="col-xl-12">
@@ -1264,6 +1264,6 @@
     </div>
     <!-- CART POPUT END -->
     <!--=========================
-                                        DASHBOARD END
-                                    ==========================-->
+                                                DASHBOARD END
+                                            ==========================-->
 @endsection
